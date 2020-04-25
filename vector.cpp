@@ -24,8 +24,23 @@ int main()
 	insert(position, value);
 	clear();
 	erase(position); or erase(from,to);//xoa nhieu phan tu;
+	 * example:
+	--------- --------
+	vector<int> a;
+	a.erase(a.begin(),a.begin()+3);  // you want to delete the first three elements.
+	a.erase(a.end()-3 , a.end());  // you want to delete the last three elements.
+	------- -----------
 	assign(size,value) gan lai gia tri cho vecto
+	--------------------
 	at(position) front(), back() truy cap den vi tri phan tu cho truoc
+	
+	vector<int>:: iterator it = v.begin();
+	advance(it,first); // iterator it trỏ đến vị trí first
+
+	vector<int>:: iterator it2 = v.begin();
+	advance(it2,last); //iterator it2 trỏ đến vị trí last
+
+	v.erase(it1, it2); // xóa phần tử từ iterator it đến iterator it2
 	*/
 	vector<int> v1;
 	v1.push_back(10);
