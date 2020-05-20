@@ -26,6 +26,7 @@ void inputFraction(phanso& s) {
 void inputFractionarray(phanso*& a, int& n) {
 	cout << " ** Enter the size of array ** " << endl;
 	cin >> n;
+	ps* a = new phanso [n];
 	cout << " ** Enter the array elements ** " << endl;
 	for (int i = 0; i < n; i++) {
 		inputFraction(a[i]);
@@ -82,7 +83,7 @@ void compactFraction_array(ps* a , int n ) {
 
 int main()
 {
-	ps* a = new phanso [MAX];
+	
 	int n;
 	ps x;
 	int temp = 1;
@@ -97,9 +98,6 @@ int main()
 		cin >> sel;
 		switch (sel)
 		{
-		/*cout << " Export  elements of array .Fress 1." << endl;
-		cout << " If you want insert  to the array  . Fress 2." << endl;
-		cout << " If you want delete to  the array . Fress 3." << endl;*/
 		case 1:
 			cout << "\nExport  elements of array :" << endl;
 			compactFraction_array(a, n);
