@@ -60,7 +60,7 @@ int main()
 		cout << " Do you want to continue ?" << "\t YES.1 \tNO.0 " << endl;
 		cin >> temp;
 	}
-	delete[]a;
+	free(a);
 
 }
 void inputFraction(phanso& s) {
@@ -80,7 +80,7 @@ void inputFraction(phanso& s) {
 void inputFractionarray(phanso*& a, int& n) {
 	cout << " ** Enter the size of array ** " << endl;
 	cin >> n;
-	a = new phanso[n];
+	a=(int*) malloc(n * sizeof(int));
 	cout << " ** Enter the array elements ** " << endl;
 	for (int i = 0; i < n; i++) {
 		inputFraction(a[i]);
@@ -110,7 +110,7 @@ void insertFraction(ps*& a, int& n, ps  x) {
 		n++;
 		a = anew;
 	}
-	free(anew);
+	
 }
 
 int  GCD(ps a) {
