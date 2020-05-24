@@ -80,7 +80,7 @@ void inputFraction(phanso& s) {
 void inputFractionarray(phanso*& a, int& n) {
 	cout << " ** Enter the size of array ** " << endl;
 	cin >> n;
-	a=(int*) malloc(n * sizeof(int));
+	a=(ps*) malloc(n * sizeof(ps));
 	cout << " ** Enter the array elements ** " << endl;
 	for (int i = 0; i < n; i++) {
 		inputFraction(a[i]);
