@@ -254,7 +254,7 @@ void listPosofPrime(int* a, int n) {
 
 void listPosofPecfect(int* a, int n) {
 	//  vi tri cac so hoan hao 
-	int flag = 0;
+  static int flag = 0;
 	if (n >= 0) {
 		flag = 1;
 		if (checkPerfectNumber(a[n])) {
