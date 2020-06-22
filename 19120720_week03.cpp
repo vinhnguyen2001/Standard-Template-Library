@@ -250,7 +250,10 @@ int findSubString(char* src, char* dest, int pos) {
 // CAU 5
 bool isSubString (char* src, char* dest) {
 	// kiem tra mang con cos xuat hien trong mang chinh hay khong
-	/*int len_dest = stringLength(dest);
+	/*  /* truong hop nay doan code bi sai 1 truong hop
+	    src="190207201912"
+	    dest="1912"
+	int len_dest = stringLength(dest);
 	int len_src = stringLength(src);
 	int flag = true;
 	int count = 0;
@@ -287,14 +290,18 @@ bool isSubString (char* src, char* dest) {
 	int length_src = strlen(src);
 	int length_dest = strlen(dest);
 	int count = 0;
-	for (int i = 0; i <= length_src-length_dest ; i++) {
+	bool flag = false;
+	for (int i = 0; i <= length_src - length_dest; i++) {
 		if (src[i] == dest[0] && src[i + length_dest - 1] == dest[length_dest - 1]) {
-			count = 0;
-			for (int j = i , t = 0 ; j < ( i+length_dest -1) ; j++ , t++) {
-				if (*(src+j) == *(dest+t)) {
+
+			for (int j = i, t = 0; j < i + length_dest; j++, t++) {
+				if (*(src + j) == *(dest + t)) {
 					count++;
 				}
-				 else break;
+				else {
+					count = 0;
+					break;
+				}
 				if (count == length_dest) {
 					return true;
 				}
