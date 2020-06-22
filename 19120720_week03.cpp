@@ -264,7 +264,8 @@ bool isSubString (char* src, char* dest) {
 				int t = 0;
 				for (int j = i; j < (i + len_dest - 1); j++, t++) {
 					if (*(src + j) != *(dest + t)) {
-						return false;
+						flag = false;
+						break;
 
 					}
 				}
