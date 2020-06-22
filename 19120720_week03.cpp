@@ -250,7 +250,7 @@ int findSubString(char* src, char* dest, int pos) {
 // CAU 5
 bool isSubString (char* src, char* dest) {
 	// kiem tra mang con cos xuat hien trong mang chinh hay khong
-	int len_dest = stringLength(dest);
+	/*int len_dest = stringLength(dest);
 	int len_src = stringLength(src);
 	int flag = true;
 	int count = 0;
@@ -283,7 +283,25 @@ bool isSubString (char* src, char* dest) {
 		else return false;
 	}
 	else
-		cout << " The string entered is not valid  " << endl;
+		cout << " The string entered is not valid  " << endl; */
+	int length_src = strlen(src);
+	int length_dest = strlen(dest);
+	int count = 0;
+	for (int i = 0; i <= length_src-length_dest ; i++) {
+		if (src[i] == dest[0] && src[i + length_dest - 1] == dest[length_dest - 1]) {
+			count = 0;
+			for (int j = i , t = 0 ; j < ( i+length_dest -1) ; j++ , t++) {
+				if (*(src+j) == *(dest+t)) {
+					count++;
+				}
+				 else break;
+				if (count == length_dest) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 //CAU 6
