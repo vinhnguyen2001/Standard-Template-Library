@@ -362,8 +362,6 @@ void popBack(Ref& head, Ref& tail) {
 		delete[](char*) tail->key;
 	}
 	free(tail);
-	tail = nullptr;
-	free(tail);
 	tail = temp;
 	temp->next = nullptr;
 }
@@ -391,6 +389,8 @@ void deleteAfter(Ref& head,Ref& tail, void* x,  int dSize, bool(*cmp)(void*, voi
 }
 
 void DeleteAtPosition(Ref& head, Ref& tail, int pos) {
+	/*
+	// WAY 1:
 	int i = 1;
 	if (head == nullptr) return;
 	if (pos == 0) {
@@ -415,6 +415,32 @@ void DeleteAtPosition(Ref& head, Ref& tail, int pos) {
 		r = r->next;
 		i++;
 	}
+	*/
+	//WAY 2:
+	if (head == nullptr) return;
+	if (head == tail) {
+		if (head->key) {
+			delete[] head->key;
+			head->key = nullptr;
+		}
+		free(head);
+		head = tail = nullptr;
+		return;
+	}
+	Ref temp = head;
+	Ref r;
+	for (int i = 0; i < pos; i++, temp = temp->next);
+	r = temp->next;
+	*(Fraction*)temp->key = *(Fraction*)r->key;
+	temp->next = r->next;
+	if (temp->next == tail) {
+		tail = temp;
+	}
+	if (r->key) {
+		delete[](char*)r->key;
+	}
+	free(r);
+	r = nullptr;
 }
 
 void printList(Ref head , void(*cmp)(void*)) {
