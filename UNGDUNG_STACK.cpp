@@ -18,8 +18,6 @@ Ref newNode(void* val, int dSize);
 
 void push (Stack*& top, void * val , int dSize);
 
-void printStack(Stack* top);
-
 char pop(Stack*& top);
 
 void convertInfixtoPostfix(string r_arr, Stack*& top, ofstream& w_file);
@@ -30,42 +28,22 @@ void calculatePostfixt(ifstream& r_file, ofstream& w_file);
 
 int convertChartoInt(char* r_Ch );
 
-void printList(Ref top, void(*cmp)(void*)) {
 
-	for (Ref temp = top; temp; temp = temp->next) {
-		(*cmp)(temp->data);
-	}
-}
-
-void printDouble(void* f) {
-
-	cout << *(double*)f << endl;
-}
-void printInt(void* f) {
-
-	cout << *(int*)f << endl;
-}
 int main() {
 	Stack* top = nullptr;
 	ifstream filein("INPUT.TXT");
 	ofstream fileout("OUTPUT.TXT", ios_base::out);
 	string arr ;
 	getline(filein ,arr);
-	/*for (int i = 0; i < arr.length(); i++) {
-		push(top,arr[i]);
-	}
-	printStack(top);
-	for (int i = 0; i < arr.length(); i++) {
-		cout<<pop(top);
-	}*/
-	
 	convertInfixtoPostfix(arr, top,fileout);
+	filein.close();
 	fileout.close();
-	ifstream fileout1("OUTPUT.TXT");
-	ofstream f_Out("OUTPUT1.TXT", ios_base::out);
-	calculatePostfixt(fileout1, f_Out);
-	string ar = "35";
-	cout<<convertChartoInt((char*)ar.c_str());
+	ifstream file("OUTPUT.TXT");
+	ofstream f_Out("KETQUA.TXT", ios_base::out);
+	calculatePostfixt(file, f_Out);
+	file.close();
+	f_Out.close();
+	return 0;
 }
 
 int isEmty(Stack* top)
@@ -103,19 +81,6 @@ void push (Stack*& top, void * val , int dSize) {
 	}
 }
 
-void printStack(Stack* top) {
-	Stack* temp;
-	if (top == nullptr) {
-		cout << "\nStack Underflow !";
-		return;
-	}
-	temp = top;
-	while (temp) {
-		cout << temp->data << endl;
-		temp = temp->next;
-	}
-}
-
 char pop(Stack*& top) {
 	Stack* temp;
 	if (top == nullptr) {
@@ -137,6 +102,9 @@ char pop(Stack*& top) {
 }
 
 void convertInfixtoPostfix(string r_arr, Stack*& top, ofstream& w_file) {
+	/*
+	 ham doi tu trung to sang hau to 
+	*/
 	int i = 0;
 	string str;
 	int len_arr = r_arr.length();
@@ -147,7 +115,7 @@ void convertInfixtoPostfix(string r_arr, Stack*& top, ofstream& w_file) {
 				str += temp;
 			}
 			else {
-				w_file << str<<" ";
+				w_file << str << " ";
 				str = "";
 				if (temp == '(') {
 					push(top,&temp,sizeof(char));
@@ -162,7 +130,7 @@ void convertInfixtoPostfix(string r_arr, Stack*& top, ofstream& w_file) {
 					}
 					else {
 						while (!isEmty(top) && Priority(temp) <= Priority(*(char*)top->data)) {
-							w_file << *(char*)top->data;
+							w_file << *(char*)top->data << " ";
 							pop(top);
 						}
 						push(top, &temp, sizeof(char));
@@ -191,10 +159,10 @@ void calculatePostfixt(ifstream& r_file, ofstream& w_file) {
 	string str;
 	string temp;
 	getline(r_file, str);
+	
 	int j = 0;
-	//cout << str;
 	int len_str = str.length();
-	for (int i = 1; i <len_str; i++) {
+	for (int i = 0; i <len_str; i++) {
 			if (0 <= str[i] - '0' && str[i] - '0' <= 9) {
 				j = i + 1;
 				while (str[j] != ' ') {
@@ -224,9 +192,7 @@ void calculatePostfixt(ifstream& r_file, ofstream& w_file) {
 				else if (str[i] == '*')result = a * b;
 				else if (str[i] == '/')result = b / a;
 				else if (str[i] == '^')result = pow(b,a);
-				cout << "\nResult" << result;
-				push(top, &result, sizeof(double));
-				printList(top, printDouble);
+				push(top, &result, sizeof(double));	
 			}
 	}
 	if (top) {
@@ -236,6 +202,7 @@ void calculatePostfixt(ifstream& r_file, ofstream& w_file) {
 		top = nullptr;
 	}
 }
+
 int convertChartoInt(char* r_Ch) {
 	int result = 0;
 	int len_r_ch = strlen(r_Ch);
