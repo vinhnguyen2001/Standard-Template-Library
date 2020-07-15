@@ -32,6 +32,10 @@ int convertChartoInt(char* r_Ch );
 int main() {
 	Stack* top = nullptr;
 	ifstream filein("INPUT.TXT");
+	if(!filein){
+		cout<<"\nCannot open this file INPUT.TXT !";
+		return -1;
+	}
 	ofstream fileout("OUTPUT.TXT", ios_base::out);
 	string arr ;
 	getline(filein ,arr);
@@ -39,6 +43,10 @@ int main() {
 	filein.close();
 	fileout.close();
 	ifstream file("OUTPUT.TXT");
+	if(!file){
+		cout<<"\nCannot open this file OUTPUT.TXT !";
+		return -1;
+	}
 	ofstream f_Out("KETQUA.TXT", ios_base::out);
 	calculatePostfixt(file, f_Out);
 	file.close();
