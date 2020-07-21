@@ -38,6 +38,8 @@ int findValue (Slist* r_list, int value , int n );
 
 void directInsertion(Slist*& u_list, int n);
 
+void destroyList(Slist*& u_list);
+
 int main(){
 	Slist*list=nullptr;
 	initialize(list);
@@ -62,6 +64,7 @@ int main(){
 	directInsertion(list, n);
 	printList(list);
     cout<<"\nVi tri "<<findValue(list, 6, 8);
+	destroyList(list);
 	return 0;
 }
 
@@ -119,9 +122,9 @@ Snode* pushBack(Slist*& u_list , int val) {
 void deleteAtPosition(Slist*& u_list, int pos) {
 	if (u_list->head ==nullptr) return;
 	if (u_list->head == u_list->tail) {
+		delete u_list->head;
 		delete[]u_list;
-		u_list->head = nullptr;
-		u_list->tail = nullptr;
+		u_list = nullptr;
 		return;
 	}
 	Snode* temp = u_list->head;
@@ -138,9 +141,9 @@ void deleteAtPosition(Slist*& u_list, int pos) {
 void popBack(Slist*& u_list) {
 	if (u_list->head == nullptr) return;
 	if (u_list->head == u_list->tail) {
+		delete u_list->head;
 		delete[]u_list;
-		u_list->head = nullptr;
-		u_list->tail = nullptr;
+		u_list = nullptr;
 		return;
 	}
 	Snode* temp = u_list->head;
@@ -278,5 +281,17 @@ int findValue(Slist* r_list, int value, int n) {
 		return count;
 	}
 	else return findValue(r_list, value, n - 1);
+}
 
+
+void destroyList(Slist*& u_list) {
+	if (u_list != nullptr) {
+		for (Snode* temp = u_list->head; temp != nullptr;) {
+			Snode* next = temp->pnext;
+			delete temp;
+			temp = next;
+		}
+		delete[] u_list;
+		u_list = nullptr;
+	}
 }
