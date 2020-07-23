@@ -63,7 +63,7 @@ int main(){
 	cout << endl;
 	directInsertion(list, n);
 	printList(list);
-    cout<<"\nVi tri "<<findValue(list, 6, 8);
+    cout<<"\nVi tri cua 6 trong danh sach la : "<<findValue(list, 6, 8);
 	destroyList(list);
 	return 0;
 }
