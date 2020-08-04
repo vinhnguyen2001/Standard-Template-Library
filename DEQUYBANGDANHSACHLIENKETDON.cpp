@@ -34,7 +34,9 @@ int findMaxValue (Slist* r_list , int n , int max);
 
 void reserveLinkedList(Slist*& u_list, int n, int i  );
 
-int findValue (Slist* r_list, int value , int n );
+//int findValue (Slist* r_list, int value , int n );
+
+Snode* findValue(Slist* r_list, int value, int n);
 
 void directInsertion(Slist*& u_list, int n);
 
@@ -63,7 +65,8 @@ int main(){
 	cout << endl;
 	directInsertion(list, n);
 	printList(list);
-    cout<<"\nVi tri cua 6 trong danh sach la : "<<findValue(list, 6, 8);
+    Snode * temp =findValue(list, 6, 8);
+	cout << "\n kho tra loi : " << temp->data;
 	destroyList(list);
 	return 0;
 }
@@ -223,6 +226,11 @@ void reserveLinkedList(Slist*& u_list,  int n , int i = 0  ) {
 }
 
 void directInsertion(Slist*& u_list, int n) {
+	/*
+	Ham sap xep danh sach tang dan theo phuong phap chen truc tiep. 
+	Tra ve danh sach tang da duoc sap xep theo thu tu tang dan.
+	*/
+
 	if (n == 2) {
 		if (u_list->head->data > u_list->head->pnext->data) {
 			swap(u_list->head->data, u_list->head->pnext->data);
@@ -267,9 +275,32 @@ void directInsertion(Slist*& u_list, int n) {
 
 }
 
-int findValue(Slist* r_list, int value, int n) {
+//int findValue(Slist* r_list, int value, int n) {
+//	if (n == 0) {
+//		return -1;
+//	}
+//	int count = 1;
+//	Snode* temp = r_list->head;
+//	while (count != n) {
+//		count++;
+//		temp = temp->pnext;
+//	}
+//	if (temp->data == value) {
+//		return count;
+//	}
+//	else return findValue(r_list, value, n - 1);
+//}
+
+Snode*  findValue(Slist* r_list, int value, int n) {
+	/*
+	tim phan cua co trong danh sach :
+	+ du lieu vao la gia tri can tim.
+	+ neu thanh cong tra ve phan tu do trong danh sach
+	+ nguoc lai tra ve con tro rong.
+	*/
+
 	if (n == 0) {
-		return -1;
+		return nullptr;
 	}
 	int count = 1;
 	Snode* temp = r_list->head;
@@ -278,13 +309,15 @@ int findValue(Slist* r_list, int value, int n) {
 		temp = temp->pnext;
 	}
 	if (temp->data == value) {
-		return count;
+		return temp;
 	}
 	else return findValue(r_list, value, n - 1);
 }
 
-
 void destroyList(Slist*& u_list) {
+	
+	// Ham huy danh sach.
+
 	if (u_list != nullptr) {
 		for (Snode* temp = u_list->head; temp != nullptr;) {
 			Snode* next = temp->pnext;
